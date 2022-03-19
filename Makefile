@@ -20,17 +20,19 @@ help:
 	@echo 'make pages           Generate and commit the github-pages site (the '
 	@echo '                     result still needs to be pushed to github).'
 
-.PHONY: init
-init: docs
+.vendor:
 	bundle config set path .vendor/bundle
 	bundle install
 
+.PHONY: init
+init: docs .vendor
+
 .PHONY: html
-html: docs
+html: docs .vendor
 	$(JEKYLL) build $(OPTS)
 
 .PHONY: serve
-serve: docs
+serve: docs .vendor
 	$(JEKYLL) serve -w $(OPTS)
 
 .PHONY: pages
