@@ -6,7 +6,7 @@ gh_pages/
 # Bundle stuff
 .vendor/
 .bundle/
-Gemfile.lock
+.jekyll-cache
 
 # Python stuff
 __pycache__
