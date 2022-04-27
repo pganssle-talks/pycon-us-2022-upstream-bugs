@@ -5,8 +5,13 @@ $(eval CONFIG= \
 	$(shell find config -maxdepth 1 -type f -name '*.yml' | \
 		  sort -g | awk -vORS=, ' {print $1} ')_config.yml)
 
+PDF_CONFIG_FILE=config/pdf/pdf-config.yml
+PDF_CONFIG=$(shell [[ -f $(PDF_CONFIG_FILE) ]] && echo ',$(PDF_CONFIG_FILE)')
 $(eval OPTS= \
 	--config "$(CONFIG)")
+
+$(eval PDF_OPTS= \
+	--config $(CONFIG)$(PDF_CONFIG))
 
 ##
 # Targets
@@ -30,6 +35,10 @@ init: docs .vendor
 .PHONY: html
 html: docs .vendor
 	$(JEKYLL) build $(OPTS)
+
+.PHONY: pdf
+pdf: docs .vendor
+	$(JEKYLL) build $(PDF_OPTS)
 
 .PHONY: serve
 serve: docs .vendor
