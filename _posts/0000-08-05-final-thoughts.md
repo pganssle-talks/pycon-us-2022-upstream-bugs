@@ -2,11 +2,11 @@
 
 <img
     id="splash"
-    src="images/bluejay.jpg"
-    alt="A perfectly framed and composed photo of a Blue Jay, taken by what is clearly an artistic genius."
+    src="images/cardinal-photobomb.jpg"
+    alt="A perfectly framed and composed photo of a female cardinal getting photobombed by a tufted titmouse, taken by what is clearly an artistic genius."
     style="max-height: 800px; margin-bottom: 0px"
 /><br/>
-<span style="font-size: 0.5em; margin-top: 0px">This photo doesn't really match what I'm talking about, but I wanted to show off this rad picture of a Blue Jay I took.</span>
+<span style="font-size: 0.5em; margin-top: 0px">This photo doesn't really match what I'm talking about, but I wanted to show off this rad picture of a Cardinal I took.</span>
 
 Notes:
 
