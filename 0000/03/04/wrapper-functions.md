@@ -208,15 +208,26 @@ T: 12:00
 
 # Real-life Examples
 
-1. `six`: Pretty much all wrapper functions to write code that works with Python 2 and 3.
+1. Feature backports
+    - `importlib_resources`
+    - Most things in the `backports` namespace.
 
-<img
-src="images/six-top-10.png"
-alt="An image from pypistats.org showing Most Downloaded PyPI Packages. urllib3 is first with 3.2M/day and six is second with 2.9M/day."
-style="display:block; margin-left: auto; margin-right: auto;"
+2. `six`: Pretty much all wrapper functions to write code that works with Python 2 and 3.
+
+<img src="images/six-top-10.png"
+     alt="An image from pypistats.org showing Most Downloaded PyPI Packages. urllib3 is first with 3.2M/day and six is second with 2.9M/day."
+     class = "nospace-fragment disappearing-fragment fragment fade-out"
+     data-fragment-index="0"
+     style="display:block; margin-left: auto; margin-right: auto;"
 />
+<img src="images/six-top-10-now.png"
+     alt="An image from pypistats.org showing Most Downloaded PyPI packages. six is now in 9th place"
+     class="nospace-fragment fragment fade-in"
+     data-fragment-index="0"
+     style="display:block; margin-left: auto; margin-right: auto;"
+     />
 
-2. [`pytz-deprecation-shim`](https://pytz-deprecation-shim.readthedocs.io/en/latest/)
+3. [`pytz-deprecation-shim`](https://pytz-deprecation-shim.readthedocs.io/en/latest/)
     - Wrapper classes that mimic `pytz`'s interface
     - Uses `zoneinfo` and `dateutil` under the hood
     - No `pytz` dependency!
@@ -224,9 +235,6 @@ style="display:block; margin-left: auto; margin-right: auto;"
     <br/>
     <br/>
 
-3. Feature backports
-    - `importlib_resources`
-    - Most things in the `backports` namespace.
 
 Notes:
 

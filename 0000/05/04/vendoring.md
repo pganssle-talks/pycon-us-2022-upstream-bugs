@@ -164,16 +164,20 @@ T: 23:30
 
 # Real-life examples
 
-- This talk!
-    - `reveal.js` and `jekyll-revealjs` are vendored into the source.
-    <span class="disappearing-fragment fragment fade-out" data-fragment-index="0"><br/><br/></span>
-    - <!-- .element class="nospace-fragment fragment" data-fragment-index="0" --> <tt>jekyll-reveal</tt> even carries a patch! <span class="emoji">🤦</span><br/><br/>
-- `pip` and `setuptools` vendor all their dependencies to avoid bootstrapping issues.
-    - Both have a "no patches in tree" policy.
+- `pip` and `setuptools` vendor all their dependencies to avoid bootstrapping issues (no patching).
     - Manipulates namespace resolution to get name resolution to work.<br/><br/>
 
 - `invoke` vendors all its dependencies (including separate Python 2 and 3 trees for `pyyaml`)
-    - No dependencies have been updated in >= 4 years <span class="emoji">☹</span>
+    - No dependencies have been updated in > 5 years <span class="emoji">☹</span><br/><br/>
+
+- This talk!
+    - `reveal.js` and `jekyll-revealjs` are vendored into the source.
+    - <!-- .element class="fragment" data-fragment-index="0" --> <tt>jekyll-reveal</tt> even carries a patch! <span class="emoji">🤦</span><br/>
+    <img src ="images/jekyll-reveal-prs.jpg"
+         alt="A screenshot of the jekyll-reveal repository, showing two PRs open since November 2021"
+         class="fragment" data-fragment-index="0"
+         style="display:block; margin-left: auto; margin-right: auto;"
+         />
 
 Notes:
 

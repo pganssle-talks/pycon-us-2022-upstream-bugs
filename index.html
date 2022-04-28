@@ -186,7 +186,6 @@ T: 3:30
 - File an issue upstream<br/>
 - Submit a patch to fix the issue upstream <!-- .element class="fragment" data-fragment-index="1" -->
 - Wait for release <!-- .element class="fragment" data-fragment-index="2" -->
-- Update your version <!-- .element class="fragment" data-fragment-index="3" -->
 
 <img
     src="images/pandas-agg-issue.png"
@@ -206,15 +205,19 @@ T: 3:30
     class="nospace-fragment fragment fade-in"
     data-fragment-index="2" />
 
+More details about the practical aspects: https://ganssle.io/talks/#contributing-oss-pydata2018
+
 Notes:
 
 What should we do now? Well, we should do the right thing, we should at least start with the right thing.
 
 First we file an issue containing our minimal reproducer and the expected results.
 
-You can also submit a patch to fix the issue upstream. In this case it was pretty straightforward so I submitted a PR and within a day or so it was actually merged. So far this is looking like an open source success story.
+You can also submit a patch to fix the issue upstream. In this case it was pretty straightforward so I submitted a PR and within a day or so it was actually merged.
 
-Then we just have to wait for a pandas release that includes the fix and update my version and the problem is solved!
+As an aside here — if this seems like an intimidating process or you want more information about the practical details of making upstream contributions, I gave a talk at PyData NYC in 2018 on contributing to open source, and I've included the link at the bottom of the slide here.
+
+So — back to our PR; so far this is looking like an open source success story. We just have to wait for a pandas release, update our production version, and the problem is solved!
 
 S: 45s
 T: 4:15
@@ -471,15 +474,26 @@ T: 12:00
 
 # Real-life Examples
 
-1. `six`: Pretty much all wrapper functions to write code that works with Python 2 and 3.
+1. Feature backports
+    - `importlib_resources`
+    - Most things in the `backports` namespace.
 
-<img
-src="images/six-top-10.png"
-alt="An image from pypistats.org showing Most Downloaded PyPI Packages. urllib3 is first with 3.2M/day and six is second with 2.9M/day."
-style="display:block; margin-left: auto; margin-right: auto;"
+2. `six`: Pretty much all wrapper functions to write code that works with Python 2 and 3.
+
+<img src="images/six-top-10.png"
+     alt="An image from pypistats.org showing Most Downloaded PyPI Packages. urllib3 is first with 3.2M/day and six is second with 2.9M/day."
+     class = "nospace-fragment disappearing-fragment fragment fade-out"
+     data-fragment-index="0"
+     style="display:block; margin-left: auto; margin-right: auto;"
 />
+<img src="images/six-top-10-now.png"
+     alt="An image from pypistats.org showing Most Downloaded PyPI packages. six is now in 9th place"
+     class="nospace-fragment fragment fade-in"
+     data-fragment-index="0"
+     style="display:block; margin-left: auto; margin-right: auto;"
+     />
 
-2. [`pytz-deprecation-shim`](https://pytz-deprecation-shim.readthedocs.io/en/latest/)
+3. [`pytz-deprecation-shim`](https://pytz-deprecation-shim.readthedocs.io/en/latest/)
     - Wrapper classes that mimic `pytz`'s interface
     - Uses `zoneinfo` and `dateutil` under the hood
     - No `pytz` dependency!
@@ -487,9 +501,6 @@ style="display:block; margin-left: auto; margin-right: auto;"
     <br/>
     <br/>
 
-3. Feature backports
-    - `importlib_resources`
-    - Most things in the `backports` namespace.
 
 Notes:
 
@@ -931,16 +942,20 @@ T: 23:30
 
 # Real-life examples
 
-- This talk!
-    - `reveal.js` and `jekyll-revealjs` are vendored into the source.
-    <span class="disappearing-fragment fragment fade-out" data-fragment-index="0"><br/><br/></span>
-    - <!-- .element class="nospace-fragment fragment" data-fragment-index="0" --> <tt>jekyll-reveal</tt> even carries a patch! <span class="emoji">🤦</span><br/><br/>
-- `pip` and `setuptools` vendor all their dependencies to avoid bootstrapping issues.
-    - Both have a "no patches in tree" policy.
+- `pip` and `setuptools` vendor all their dependencies to avoid bootstrapping issues (no patching).
     - Manipulates namespace resolution to get name resolution to work.<br/><br/>
 
 - `invoke` vendors all its dependencies (including separate Python 2 and 3 trees for `pyyaml`)
-    - No dependencies have been updated in >= 4 years <span class="emoji">☹</span>
+    - No dependencies have been updated in > 5 years <span class="emoji">☹</span><br/><br/>
+
+- This talk!
+    - `reveal.js` and `jekyll-revealjs` are vendored into the source.
+    - <!-- .element class="fragment" data-fragment-index="0" --> <tt>jekyll-reveal</tt> even carries a patch! <span class="emoji">🤦</span><br/>
+    <img src ="images/jekyll-reveal-prs.jpg"
+         alt="A screenshot of the jekyll-reveal repository, showing two PRs open since November 2021"
+         class="fragment" data-fragment-index="0"
+         style="display:block; margin-left: auto; margin-right: auto;"
+         />
 
 Notes:
 
@@ -1080,15 +1095,153 @@ T: 29:00
 				
 				<section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$" data-notes="^Note:">
 					<textarea data-template>
+# Strategy Recap
+<style>
+.pro-header {
+    background-color: #4cc649;
+    padding-bottom:5px !important;
+}
+
+.con-header {
+    background-color: #f93232;
+    padding-bottom: 5px !important;
+}
+
+div.procon-container {
+    display: flex;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+}
+
+div.pro-or-con-div {
+    width: 50%
+}
+</style>
+
+## Patching upstream <span class="emoji">💖</span>
+
+<div class="procon-container">
+<div class="pro-or-con-div">
+
+<h4 class="pro-header">Pros:</h4>
+<ul>
+<li> You fix the bug for everyone</li>
+<li> Nothing to maintain afterwards (for you...)</li>
+<li> Improves your relationship with the maintainers of software you use (hopefully)</li>
+</ul>
+</div>
+<div class="pro-or-con-div">
+<h4 class="con-header">Cons:</h4>
+<ul>
+    <li>Delays!</li>
+    <li>You have to convince someone to accept your patch (or fix the bug)</li>
+</ul>
+</div>
+</div>
+
+<br/><br/>
+
+## Wrapper functions <span class="emoji">🆗</span>
+
+<div class="procon-container">
+<div class="pro-or-con-div">
+<h4 class="pro-header">Pros:</h4>
+<ul>
+    <li>Helps maintain cross-version compatibility</li>
+    <li>Easy to remove when the need is done</li>
+    <li>Can opportunistically upgrade</li>
+    <li>Can roll out immediately</li>
+</ul>
+</div>
+<div class="pro-or-con-div">
+<h4 class="con-header">Cons:</h4>
+<ul>
+    <li>Only works when it's possible to work around the bug.</li>
+    <li>Only works for the code you are currently writing.</li>
+</ul>
+</div>
+
+--
+
+## Monkey patching <span class="emoji">🙈</span>
+
+<div class="procon-container">
+<div class="pro-or-con-div">
+<h4 class="pro-header">Pros:</h4>
+<ul>
+    <li>Make targeted global fixes.</li>
+    <li>Doesn't complicate packaging or deployment.</li>
+</ul>
+</div>
+<div class="pro-or-con-div">
+<h4 class="con-header">Cons:</h4>
+<ul>
+    <li>Hard to reason about.</li>
+    <li>Not likely to be compatible across versions.</li>
+    <li>Can cause compatibility problems with other users of the same library.</li>
+</ul>
+</div>
+</div>
+
+## Vendoring <span class="emoji">☣️</span>
+
+<div class="procon-container">
+<div class="pro-or-con-div">
+<h4 class="pro-header">Pros:</h4>
+<ul>
+    <li>Can unblock dependency resolution issues.</li>
+    <li>Isolates any changes from the wider system.</li>
+</ul>
+</div>
+
+<div class="pro-or-con-div">
+<h4 class="con-header">Cons:</h4>
+<ul>
+    <li>Complicated to implement right.</li>
+    <li>Doesn't work well when the vendored package is part of your public interface.</li>
+    <li>Tooling support is very weak.</li>
+</ul>
+</div>
+</div>
+
+## Maintaining a fork <span class="emoji">☢️</span>
+
+<div class="procon-container">
+<div class="pro-or-con-div">
+<h4 class="pro-header">Pros:</h4>
+<ul>
+    <li>Relatively easy to implement in some systems.</li>
+    <li>Tools exist for this.</li>
+</ul>
+</div>
+
+<div class="pro-or-con-div">
+<h4 class="con-header">Cons:</h4>
+<ul>
+    <li>Upstream doesn't know about your fork!</li>
+    <li>Adds friction with upgrades.</li>
+    <li>Compatibility degrades over time.</li>
+</ul>
+</div>
+</div>
+
+					</textarea>
+				</section>
+				
+				<section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$" data-notes="^Note:">
+					<textarea data-template>
 # Final Thoughts
 
 <img
     id="splash"
-    src="images/bluejay.jpg"
-    alt="A perfectly framed and composed photo of a Blue Jay, taken by what is clearly an artistic genius."
+    src="images/cardinal-photobomb.jpg"
+    alt="A perfectly framed and composed photo of a female cardinal getting photobombed by a tufted titmouse, taken by what is clearly an artistic genius."
     style="max-height: 800px; margin-bottom: 0px"
 /><br/>
-<span style="font-size: 0.5em; margin-top: 0px">This photo doesn't really match what I'm talking about, but I wanted to show off this rad picture of a Blue Jay I took.</span>
+<span style="font-size: 0.5em; margin-top: 0px">This photo doesn't really match what I'm talking about, but I wanted to show off this rad picture of a Cardinal I took.</span>
 
 Notes:
 
