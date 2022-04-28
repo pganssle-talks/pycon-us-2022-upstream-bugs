@@ -79,7 +79,6 @@ T: 3:30
 - File an issue upstream<br/>
 - Submit a patch to fix the issue upstream <!-- .element class="fragment" data-fragment-index="1" -->
 - Wait for release <!-- .element class="fragment" data-fragment-index="2" -->
-- Update your version <!-- .element class="fragment" data-fragment-index="3" -->
 
 <img
     src="images/pandas-agg-issue.png"
@@ -99,15 +98,19 @@ T: 3:30
     class="nospace-fragment fragment fade-in"
     data-fragment-index="2" />
 
+More details about the practical aspects: https://ganssle.io/talks/#contributing-oss-pydata2018
+
 Notes:
 
 What should we do now? Well, we should do the right thing, we should at least start with the right thing.
 
 First we file an issue containing our minimal reproducer and the expected results.
 
-You can also submit a patch to fix the issue upstream. In this case it was pretty straightforward so I submitted a PR and within a day or so it was actually merged. So far this is looking like an open source success story.
+You can also submit a patch to fix the issue upstream. In this case it was pretty straightforward so I submitted a PR and within a day or so it was actually merged.
 
-Then we just have to wait for a pandas release that includes the fix and update my version and the problem is solved!
+As an aside here — if this seems like an intimidating process or you want more information about the practical details of making upstream contributions, I gave a talk at PyData NYC in 2018 on contributing to open source, and I've included the link at the bottom of the slide here.
+
+So — back to our PR; so far this is looking like an open source success story. We just have to wait for a pandas release, update our production version, and the problem is solved!
 
 S: 45s
 T: 4:15
