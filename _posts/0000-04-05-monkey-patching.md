@@ -186,8 +186,10 @@ from contextlib import contextmanager
 def bugfix_patch():
     if _needs_patch(): # Don't forget opportunistic upgrades!
         _do_monkey_patch()
-        yield
-        _undo_monkey_patch()
+        try:
+            yield
+        finally:
+            _undo_monkey_patch()
     else:
         yield
 
